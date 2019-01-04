@@ -1,0 +1,38 @@
+
+
+.slideBox{
+      box-shadow: rgb(204, 204, 204) 0px 1px 2px;
+  background: #fff;
+
+
+  min-height: 100px;
+  margin-top:100px;
+
+  padding:5px 30px 50px 30px;
+  position: relative;
+}
+
+.slideBox > button{
+  position: absolute;
+  bottom:15px;
+}
+
+.slideBox .slide{
+
+  margin-bottom: 10px;
+  padding:10px;
+
+
+  position: relative;
+  background: #fff;
+  -webkit-box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+  box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+  margin: 1rem 0;
+  padding: 1em 1em;
+  border-radius: .28571429rem;
+  border: 1px solid rgba(34,36,38,.15);
+}
+
+.slideBox li {
+  list-style-type: none;
+}
