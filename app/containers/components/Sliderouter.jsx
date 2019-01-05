@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Slidebox from './Slidebox';
 import Modal from 'react-modal';
+import panel  from './coffee.svg';
 
-
+import fetchWP from '../../utils/fetchWP';
 
 
 const customStyles = {
@@ -22,16 +23,22 @@ export default class Slideouter extends Component {
   constructor(props){
     super(props);
 
-    this.state = {
-      modalIsOpen: false,
-    }
+      this.state = {
+        modalIsOpen: false,
+        slider:[]
+      }
 
-    this.props.init();
+      this.fetchWP = new fetchWP({
+        restURL: this.props.wpObject.api_url,
+        restNonce: this.props.wpObject.api_nonce,
+      });
 
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
+
+
 
 
   openModal() {
@@ -49,33 +56,55 @@ export default class Slideouter extends Component {
 
 
 
+
+
+
+
+
+  getAllSlider = () => {
+    this.fetchWP.get( 'myslider' )
+    .then(
+      (json) => {
+          console.log(json);
+          this.setState({
+            slider: json.value,
+          });
+        },
+      (err) => console.log( 'error', err )
+    );
+  };
+
+
   componentDidMount(){
     /*  get all slider data */
+    this.getAllSlider();
   }
 
 
-  addSlider = () =>{
-    this.setState({
-      slider:[...this.props.sliderData,Math.random()]
-    });
-    console.log(this.props.sliderData);
-  }
+
+
+
 
 
 
   render(){
       return (
+        <div>
+        <div  className="app-header">
+          <div><img src={"/wp-content/plugins/wp-reactivate-master/assets/"+panel} /></div>
+          <div><h3> Slider Setting</h3></div>
+        </div>
         <div  className="slideBox">
           <div className="inner">
             {
-              this.props.sliderData.map((sl) =>
-                <li key={sl.toString()}  ><Slidebox   onclicked={this.openModal} /></li>
+              this.state.slider.map((sl) =>
+                <li key={sl.id.toString()}  >
+                  <Slidebox sname={sl.name}  slideData={sl.xslide} />
+                </li>
               )
             }
           </div>
           <button className="button" onClick={this.addSlider}>Add Slider</button>
-
-
               <Modal
                     isOpen={this.state.modalIsOpen}
                     onAfterOpen={this.afterOpenModal}
@@ -93,6 +122,7 @@ export default class Slideouter extends Component {
                   </Modal>
 
         </div>
+      </div>
       )
   }
 }

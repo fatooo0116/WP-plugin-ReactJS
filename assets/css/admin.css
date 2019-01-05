@@ -1,16 +1,122 @@
 
+.app-header{
+  background: #1b1c1d;
+  margin-top:100px;
+  display: flex;
+}
+.app-header div {
+  align-items: center;
+  align-content: center;
+}
+.app-header div img{
+  display: block;
+}
+.app-header div:first-child{
+  align-items: center;
+  align-content: center;
+  display: flex;
+  padding: 0 0 0 20px;
+}
+
+.app-header h3{
+  color:#fff;
+  margin: 0;
+  padding: 15px 10px;
+}
+
+
+.clearfix:before,
+.clearfix:after {
+  content: "";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+.clearfix {
+  *zoom: 1; /*For IE 6&7 only*/
+}
+.main{
+  display: flex;
+}
+.main  .image{
+    width:100px;
+}
+.main  .image{
+  display: flex;
+  text-align: center;
+  align-items: center;
+  width: 70px;
+  margin-right: 30px;
+
+}
+
+.main  .image img{
+  display: block;
+      margin: auto;
+          opacity: 0.6;
+}
+
+
+
+.slide-inner-box{
+
+}
+
+.slide  .REST_Controller{
+    position: absolute;
+    right: 10px;
+    bottom:10px;
+}
+.slide  .REST_Controller  button{
+      height: 24px;
+      line-height: 18px;
+      font-size: 13px;
+}
+
+
+
+
+.slideBox  .slide-inner-box{
+  margin-bottom: 10px;
+  padding:10px;
+
+
+  position: relative;
+  background: #fff;
+  -webkit-box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+  box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+  margin: 1rem 0;
+  padding: 1em 1em;
+  border-radius: .28571429rem;
+  border: 1px solid rgba(34,36,38,.15);
+}
+
+.slideBox  .slide-inner-box .slide_controller  .button{
+  margin-right:20px;
+}
+.slideBox  .slide-inner-box .slide_controller  label{
+  line-height: 25px;
+}
+
+
+
+
+
+
 
 .slideBox{
-      box-shadow: rgb(204, 204, 204) 0px 1px 2px;
+  box-shadow: rgb(204, 204, 204) 0px 1px 2px;
   background: #fff;
 
-
   min-height: 100px;
-  margin-top:100px;
 
   padding:5px 30px 50px 30px;
   position: relative;
 }
+
+
+
 
 .slideBox > button{
   position: absolute;
@@ -28,7 +134,7 @@
   -webkit-box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
   box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
   margin: 1rem 0;
-  padding: 1em 1em;
+  padding: .5em;
   border-radius: .28571429rem;
   border: 1px solid rgba(34,36,38,.15);
 }

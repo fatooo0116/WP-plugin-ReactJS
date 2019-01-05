@@ -9,7 +9,7 @@ import Admin from './containers/Admin.jsx';
 
 document.addEventListener('DOMContentLoaded', function() {
   ReactDOM.render(
-    <Admin wpObject={window.wpr_object} />,
+    <Admin  />,
     document.getElementById('wp-reactivate-admin')
   );
 });

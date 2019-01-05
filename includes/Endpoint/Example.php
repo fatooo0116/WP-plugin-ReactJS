@@ -141,6 +141,14 @@ class Example {
 			$my_table = $wpdb->prefix."SliderTool";
 			$sql = "SELECT * FROM ".$my_table." order by id";
 			$results = $wpdb->get_results($sql);
+
+			foreach($results as $item){
+					$my_table = $wpdb->prefix."SliderTool_slide";
+					$sql = "SELECT * FROM ".$my_table." WHERE  slider=".$item->id;
+					$results_slide = $wpdb->get_results($sql);
+
+					$item->xslide = $results_slide;
+			}
 			// json_encode($results)
 
 			return new \WP_REST_Response( array(
