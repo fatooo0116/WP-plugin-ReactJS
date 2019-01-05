@@ -57,6 +57,48 @@ export default class Slideouter extends Component {
 
 
 
+/*
+
+getSetting = () => {
+    this.fetchWP.get( 'example' )
+    .then(
+      (json) => this.setState({
+        exampleSetting: json.value,
+        savedExampleSetting: json.value
+      }),
+      (err) => console.log( 'error', err )
+    );
+  };
+
+  updateSetting = () => {
+    this.fetchWP.post( 'example', { exampleSetting: this.state.exampleSetting } )
+    .then(
+      (json) => this.processOkResponse(json, 'saved'),
+      (err) => console.log('error', err)
+    );
+  }
+
+  deleteSetting = () => {
+    this.fetchWP.delete( 'example' )
+    .then(
+      (json) => this.processOkResponse(json, 'deleted'),
+      (err) => console.log('error', err)
+    );
+  }
+
+  processOkResponse = (json, action) => {
+    if (json.success) {
+      this.setState({
+        exampleSetting: json.value,
+        savedExampleSetting: json.value,
+      });
+    } else {
+      console.log(`Setting was not ${action}.`, json);
+    }
+  }
+
+*/
+
 
 
 
@@ -74,6 +116,19 @@ export default class Slideouter extends Component {
     );
   };
 
+  addSlider= () => {
+    this.fetchWP.post( 'myslider', { exampleSetting: this.state.exampleSetting } )
+    .then(
+      (json) => this.processOkResponse(json, 'saved'),
+      (err) => console.log('error', err)
+    );
+  }
+
+
+
+
+
+
 
   componentDidMount(){
     /*  get all slider data */
@@ -82,7 +137,21 @@ export default class Slideouter extends Component {
 
 
 
-
+  addSlider = () =>{
+    console.log("ADD");
+    /*
+    this.fetchWP.post( 'myslider' )
+    .then(
+      (json) => {
+          console.log(json);
+          this.setState({
+            slider: json.value,
+          });
+        },
+      (err) => console.log( 'error', err )
+    );
+    */
+  }
 
 
 

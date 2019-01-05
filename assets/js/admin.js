@@ -515,6 +515,32 @@ function (_Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "addSlider", function () {
+      _this.fetchWP.post('myslider', {
+        exampleSetting: _this.state.exampleSetting
+      }).then(function (json) {
+        return _this.processOkResponse(json, 'saved');
+      }, function (err) {
+        return console.log('error', err);
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "addSlider", function () {
+      console.log("ADD");
+      /*
+      this.fetchWP.post( 'myslider' )
+      .then(
+        (json) => {
+            console.log(json);
+            this.setState({
+              slider: json.value,
+            });
+          },
+        (err) => console.log( 'error', err )
+      );
+      */
+    });
+
     _this.state = {
       modalIsOpen: false,
       slider: []
@@ -549,6 +575,48 @@ function (_Component) {
         modalIsOpen: false
       });
     }
+    /*
+    
+    getSetting = () => {
+        this.fetchWP.get( 'example' )
+        .then(
+          (json) => this.setState({
+            exampleSetting: json.value,
+            savedExampleSetting: json.value
+          }),
+          (err) => console.log( 'error', err )
+        );
+      };
+    
+      updateSetting = () => {
+        this.fetchWP.post( 'example', { exampleSetting: this.state.exampleSetting } )
+        .then(
+          (json) => this.processOkResponse(json, 'saved'),
+          (err) => console.log('error', err)
+        );
+      }
+    
+      deleteSetting = () => {
+        this.fetchWP.delete( 'example' )
+        .then(
+          (json) => this.processOkResponse(json, 'deleted'),
+          (err) => console.log('error', err)
+        );
+      }
+    
+      processOkResponse = (json, action) => {
+        if (json.success) {
+          this.setState({
+            exampleSetting: json.value,
+            savedExampleSetting: json.value,
+          });
+        } else {
+          console.log(`Setting was not ${action}.`, json);
+        }
+      }
+    
+    */
+
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
