@@ -122,20 +122,20 @@ class Example {
             ),
         ) );
 
+				register_rest_route( $namespace, '/myslider/', array(
+            array(
+                'methods'               => \WP_REST_Server::CREATABLE,
+                'callback'              => array( $this, 'add_slider_box' ),
+                'permission_callback'   => array( $this, 'example_permissions_check' ),
+                'args'                  => array(),
+            ),
+        ) );
 
     }
 
 
 
 		public function get_all_slider($req){
-			/*
-			if ( ! $example_option ) {
-					return new \WP_REST_Response( array(
-							'success' => true,
-							'value' => ''
-					), 200 );
-			}
-			*/
 
 			global $wpdb;
 			$my_table = $wpdb->prefix."SliderTool";
@@ -156,6 +156,35 @@ class Example {
 					'value' =>  $results
 			), 200 );
 		}
+
+
+		public function add_slider_box($req){
+
+			global $wpdb;
+			$my_table = $wpdb->prefix."SliderTool";
+
+			$data = array('name' => $req->get_param('name'));
+			$format = array('%s');
+			$wpdb->insert($my_table,$data,$format);
+
+			$sql = "SELECT * FROM ".$my_table." order by id";
+			$results = $wpdb->get_results($sql);
+
+			foreach($results as $item){
+					$my_table = $wpdb->prefix."SliderTool_slide";
+					$sql = "SELECT * FROM ".$my_table." WHERE  slider=".$item->id;
+					$results_slide = $wpdb->get_results($sql);
+
+					$item->xslide = $results_slide;
+			}
+
+
+			return new \WP_REST_Response( array(
+					'success' => true,
+					'value' =>  $results
+			), 200 );
+		}
+
 
 
 

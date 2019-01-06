@@ -197,186 +197,14 @@ Admin.propTypes = {
 
 /***/ }),
 
-/***/ "./app/containers/components/Slide.jsx":
-/*!*********************************************!*\
-  !*** ./app/containers/components/Slide.jsx ***!
-  \*********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Slide; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _image_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./image.svg */ "./app/containers/components/image.svg");
-/* harmony import */ var _image_svg__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_image_svg__WEBPACK_IMPORTED_MODULE_1__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-
-var Slide =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(Slide, _Component);
-
-  function Slide() {
-    _classCallCheck(this, Slide);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(Slide).apply(this, arguments));
-  }
-
-  _createClass(Slide, [{
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "slide"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "clearfix  main"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "image"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "/wp-content/plugins/wp-reactivate-master/assets/" + _image_svg__WEBPACK_IMPORTED_MODULE_1___default.a
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "inner-content"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "header"
-      }, "Arrowhead Valley Camp"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "description"
-      }, "img"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "REST_Controller"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "button"
-      }, "Edit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "button"
-      }, "Delete")));
-    }
-  }]);
-
-  return Slide;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-
-
-
-/***/ }),
-
 /***/ "./app/containers/components/Slidebox.jsx":
 /*!************************************************!*\
   !*** ./app/containers/components/Slidebox.jsx ***!
   \************************************************/
 /*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Slidebox; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Slide__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Slide */ "./app/containers/components/Slide.jsx");
-/* harmony import */ var _utils_fetchWP__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/fetchWP */ "./app/utils/fetchWP.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-
-
-var Slidebox =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(Slidebox, _Component);
-
-  function Slidebox(props) {
-    var _this;
-
-    _classCallCheck(this, Slidebox);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Slidebox).call(this, props));
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "toggleEditName", function () {
-      _this.setState({
-        isEdit: !_this.state.isEdit
-      });
-    });
-
-    _this.state = {
-      isEdit: false
-    };
-    return _this;
-  }
-
-  _createClass(Slidebox, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      /*
-      this.setState({
-        slideDate: this.props.
-      });
-      */
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var SliderName = this.state.isEdit ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
-        defaultValue: this.props.sname
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "button",
-        onClick: this.toggleEditName
-      }, "Save")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        onClick: this.toggleEditName
-      }, this.props.sname);
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "slide-inner-box",
-        onClick: this.props.onclicked
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "slide_controller"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "button"
-      }, " ADD "), SliderName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "content"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Slide__WEBPACK_IMPORTED_MODULE_1__["default"], null)))));
-    }
-  }]);
-
-  return Slidebox;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-
-
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/hsujeihsien/Sites/archin.wdr.tw/wp-content/plugins/WP-plugin-ReactJS/app/containers/components/Slidebox.jsx: Unexpected token, expected \";\" (42:12)\n\n\u001b[0m \u001b[90m 40 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 41 | \u001b[39m  deleteSliderBox \u001b[33m=\u001b[39m (e) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 42 | \u001b[39m    let data\u001b[33m-\u001b[39mkey \u001b[33m=\u001b[39m e\u001b[33m.\u001b[39mtarget\u001b[33m.\u001b[39mgetAttribute(\u001b[32m'data-key'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 43 | \u001b[39m    \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mprops\u001b[33m.\u001b[39mdeleteBox(data\u001b[33m-\u001b[39mkey)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 44 | \u001b[39m  }\u001b[0m\n\u001b[0m \u001b[90m 45 | \u001b[39m\u001b[0m\n    at _class.raise (/Users/hsujeihsien/Sites/archin.wdr.tw/wp-content/plugins/WP-plugin-ReactJS/node_modules/@babel/parser/lib/index.js:3939:15)\n    at _class.unexpected (/Users/hsujeihsien/Sites/archin.wdr.tw/wp-content/plugins/WP-plugin-ReactJS/node_modules/@babel/parser/lib/index.js:5248:16)\n    at _class.semicolon (/Users/hsujeihsien/Sites/archin.wdr.tw/wp-content/plugins/WP-plugin-ReactJS/node_modules/@babel/parser/lib/index.js:5232:40)\n    at _class.parseVarStatement (/Users/hsujeihsien/Sites/archin.wdr.tw/wp-content/plugins/WP-plugin-ReactJS/node_modules/@babel/parser/lib/index.js:7596:10)\n    at _class.parseStatementContent (/Users/hsujeihsien/Sites/archin.wdr.tw/wp-content/plugins/WP-plugin-ReactJS/node_modules/@babel/parser/lib/index.js:7195:21)\n    at _class.parseStatement (/Users/hsujeihsien/Sites/archin.wdr.tw/wp-content/plugins/WP-plugin-ReactJS/node_modules/@babel/parser/lib/index.js:7145:17)\n    at _class.parseBlockOrModuleBlockBody (/Users/hsujeihsien/Sites/archin.wdr.tw/wp-content/plugins/WP-plugin-ReactJS/node_modules/@babel/parser/lib/index.js:7696:23)\n    at _class.parseBlockBody (/Users/hsujeihsien/Sites/archin.wdr.tw/wp-content/plugins/WP-plugin-ReactJS/node_modules/@babel/parser/lib/index.js:7683:10)\n    at _class.parseBlock (/Users/hsujeihsien/Sites/archin.wdr.tw/wp-content/plugins/WP-plugin-ReactJS/node_modules/@babel/parser/lib/index.js:7672:10)\n    at _class.parseFunctionBody (/Users/hsujeihsien/Sites/archin.wdr.tw/wp-content/plugins/WP-plugin-ReactJS/node_modules/@babel/parser/lib/index.js:6925:24)\n    at _class.parseArrowExpression (/Users/hsujeihsien/Sites/archin.wdr.tw/wp-content/plugins/WP-plugin-ReactJS/node_modules/@babel/parser/lib/index.js:6877:10)\n    at _class.parseParenAndDistinguishExpression (/Users/hsujeihsien/Sites/archin.wdr.tw/wp-content/plugins/WP-plugin-ReactJS/node_modules/@babel/parser/lib/index.js:6493:12)\n    at _class.parseExprAtom (/Users/hsujeihsien/Sites/archin.wdr.tw/wp-content/plugins/WP-plugin-ReactJS/node_modules/@babel/parser/lib/index.js:6284:21)\n    at _class.parseExprAtom (/Users/hsujeihsien/Sites/archin.wdr.tw/wp-content/plugins/WP-plugin-ReactJS/node_modules/@babel/parser/lib/index.js:3635:52)\n    at _class.parseExprSubscripts (/Users/hsujeihsien/Sites/archin.wdr.tw/wp-content/plugins/WP-plugin-ReactJS/node_modules/@babel/parser/lib/index.js:5924:21)\n    at _class.parseMaybeUnary (/Users/hsujeihsien/Sites/archin.wdr.tw/wp-content/plugins/WP-plugin-ReactJS/node_modules/@babel/parser/lib/index.js:5903:21)\n    at _class.parseExprOps (/Users/hsujeihsien/Sites/archin.wdr.tw/wp-content/plugins/WP-plugin-ReactJS/node_modules/@babel/parser/lib/index.js:5812:21)\n    at _class.parseMaybeConditional (/Users/hsujeihsien/Sites/archin.wdr.tw/wp-content/plugins/WP-plugin-ReactJS/node_modules/@babel/parser/lib/index.js:5784:21)\n    at _class.parseMaybeAssign (/Users/hsujeihsien/Sites/archin.wdr.tw/wp-content/plugins/WP-plugin-ReactJS/node_modules/@babel/parser/lib/index.js:5731:21)\n    at _class.parseClassProperty (/Users/hsujeihsien/Sites/archin.wdr.tw/wp-content/plugins/WP-plugin-ReactJS/node_modules/@babel/parser/lib/index.js:8113:25)\n    at _class.pushClassProperty (/Users/hsujeihsien/Sites/archin.wdr.tw/wp-content/plugins/WP-plugin-ReactJS/node_modules/@babel/parser/lib/index.js:8067:30)\n    at _class.parseClassMemberWithIsStatic (/Users/hsujeihsien/Sites/archin.wdr.tw/wp-content/plugins/WP-plugin-ReactJS/node_modules/@babel/parser/lib/index.js:8000:14)\n    at _class.parseClassMember (/Users/hsujeihsien/Sites/archin.wdr.tw/wp-content/plugins/WP-plugin-ReactJS/node_modules/@babel/parser/lib/index.js:7937:10)\n    at _class.parseClassBody (/Users/hsujeihsien/Sites/archin.wdr.tw/wp-content/plugins/WP-plugin-ReactJS/node_modules/@babel/parser/lib/index.js:7892:12)\n    at _class.parseClass (/Users/hsujeihsien/Sites/archin.wdr.tw/wp-content/plugins/WP-plugin-ReactJS/node_modules/@babel/parser/lib/index.js:7842:10)\n    at _class.parseExportDefaultExpression (/Users/hsujeihsien/Sites/archin.wdr.tw/wp-content/plugins/WP-plugin-ReactJS/node_modules/@babel/parser/lib/index.js:8215:19)\n    at _class.parseExport (/Users/hsujeihsien/Sites/archin.wdr.tw/wp-content/plugins/WP-plugin-ReactJS/node_modules/@babel/parser/lib/index.js:8166:31)\n    at _class.parseStatementContent (/Users/hsujeihsien/Sites/archin.wdr.tw/wp-content/plugins/WP-plugin-ReactJS/node_modules/@babel/parser/lib/index.js:7232:27)\n    at _class.parseStatement (/Users/hsujeihsien/Sites/archin.wdr.tw/wp-content/plugins/WP-plugin-ReactJS/node_modules/@babel/parser/lib/index.js:7145:17)\n    at _class.parseBlockOrModuleBlockBody (/Users/hsujeihsien/Sites/archin.wdr.tw/wp-content/plugins/WP-plugin-ReactJS/node_modules/@babel/parser/lib/index.js:7696:23)");
 
 /***/ }),
 
@@ -426,7 +254,7 @@ function (_Component) {
   _createClass(Slidepanel, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Slidebox");
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Slide Panel");
     }
   }]);
 
@@ -515,9 +343,11 @@ function (_Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "addSlider", function () {
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "addSliderBox", function () {
+      console.log("ADD");
+
       _this.fetchWP.post('myslider', {
-        exampleSetting: _this.state.exampleSetting
+        name: 'Slider Name'
       }).then(function (json) {
         return _this.processOkResponse(json, 'saved');
       }, function (err) {
@@ -525,20 +355,28 @@ function (_Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "addSlider", function () {
-      console.log("ADD");
-      /*
-      this.fetchWP.post( 'myslider' )
-      .then(
-        (json) => {
-            console.log(json);
-            this.setState({
-              slider: json.value,
-            });
-          },
-        (err) => console.log( 'error', err )
-      );
-      */
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "deleteBox", function (e) {
+      console.log(e);
+      console.log("DEL");
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "processOkResponse", function (json, action) {
+      if (json.success) {
+        console.log(json);
+
+        _this.setState({
+          slider: json.value
+        });
+        /*
+        this.setState({
+          exampleSetting: json.value,
+          savedExampleSetting: json.value,
+        });
+        */
+
+      } else {
+        console.log("Setting was not ".concat(action, "."), json);
+      }
     });
 
     _this.state = {
@@ -631,7 +469,7 @@ function (_Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "app-header"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "/wp-content/plugins/wp-reactivate-master/assets/" + _coffee_svg__WEBPACK_IMPORTED_MODULE_3___default.a
+        src: "/wp-content/plugins/WP-plugin-ReactJS/assets/" + _coffee_svg__WEBPACK_IMPORTED_MODULE_3___default.a
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Slider Setting"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "slideBox"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -641,11 +479,13 @@ function (_Component) {
           key: sl.id.toString()
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Slidebox__WEBPACK_IMPORTED_MODULE_1__["default"], {
           sname: sl.name,
-          slideData: sl.xslide
+          kid: sl.id.toString(),
+          slideData: sl.xslide,
+          deleteBox: _this2.deleteBox
         }));
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "button",
-        onClick: this.addSlider
+        onClick: this.addSliderBox
       }, "Add Slider"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_modal__WEBPACK_IMPORTED_MODULE_2___default.a, {
         isOpen: this.state.modalIsOpen,
         onAfterOpen: this.afterOpenModal,
@@ -677,17 +517,6 @@ function (_Component) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "56e9d25b710f0145756e60c4ecbc296c.svg";
-
-/***/ }),
-
-/***/ "./app/containers/components/image.svg":
-/*!*********************************************!*\
-  !*** ./app/containers/components/image.svg ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "117a6d3e229a96ad0e0d0876352566e2.svg";
 
 /***/ }),
 

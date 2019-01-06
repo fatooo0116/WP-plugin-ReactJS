@@ -11,7 +11,7 @@ export default class Slide extends Component {
         <div className="slide">
           <div  className="clearfix  main">
             <div className="image">
-              <img src={"/wp-content/plugins/wp-reactivate-master/assets/"+imgIcon} />
+              <img src={"/wp-content/plugins/WP-plugin-ReactJS/assets/"+imgIcon} />
             </div>
             <div className="inner-content">
               <div className="header">Arrowhead Valley Camp</div>

@@ -100,7 +100,10 @@ getSetting = () => {
 */
 
 
-
+  componentDidMount(){
+    /*  get all slider data */
+    this.getAllSlider();
+  }
 
 
   getAllSlider = () => {
@@ -116,8 +119,14 @@ getSetting = () => {
     );
   };
 
-  addSlider= () => {
-    this.fetchWP.post( 'myslider', { exampleSetting: this.state.exampleSetting } )
+
+
+
+  addSliderBox = () =>{
+    console.log("ADD");
+
+    this.fetchWP.post( 'myslider', {
+      name: 'Slider Name' } )
     .then(
       (json) => this.processOkResponse(json, 'saved'),
       (err) => console.log('error', err)
@@ -125,32 +134,27 @@ getSetting = () => {
   }
 
 
-
-
-
-
-
-  componentDidMount(){
-    /*  get all slider data */
-    this.getAllSlider();
+  deleteBox = (e) => {
+    console.log(e);
+    console.log("DEL");
   }
 
 
-
-  addSlider = () =>{
-    console.log("ADD");
-    /*
-    this.fetchWP.post( 'myslider' )
-    .then(
-      (json) => {
-          console.log(json);
-          this.setState({
-            slider: json.value,
-          });
-        },
-      (err) => console.log( 'error', err )
-    );
-    */
+  processOkResponse = (json, action) => {
+    if (json.success) {
+      console.log(json);
+      this.setState({
+        slider: json.value,
+      });
+      /*
+      this.setState({
+        exampleSetting: json.value,
+        savedExampleSetting: json.value,
+      });
+      */
+    } else {
+      console.log(`Setting was not ${action}.`, json);
+    }
   }
 
 
@@ -160,7 +164,7 @@ getSetting = () => {
       return (
         <div>
         <div  className="app-header">
-          <div><img src={"/wp-content/plugins/wp-reactivate-master/assets/"+panel} /></div>
+          <div><img src={"/wp-content/plugins/WP-plugin-ReactJS/assets/"+panel} /></div>
           <div><h3> Slider Setting</h3></div>
         </div>
         <div  className="slideBox">
@@ -168,12 +172,17 @@ getSetting = () => {
             {
               this.state.slider.map((sl) =>
                 <li key={sl.id.toString()}  >
-                  <Slidebox sname={sl.name}  slideData={sl.xslide} />
+                  <Slidebox
+                      sname={sl.name}
+                      kid={sl.id.toString()}
+                      slideData={sl.xslide}
+                      deleteBox={ this.deleteBox }
+                      />
                 </li>
               )
             }
           </div>
-          <button className="button" onClick={this.addSlider}>Add Slider</button>
+          <button className="button" onClick={this.addSliderBox}>Add Slider</button>
               <Modal
                     isOpen={this.state.modalIsOpen}
                     onAfterOpen={this.afterOpenModal}
