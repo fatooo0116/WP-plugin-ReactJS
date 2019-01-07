@@ -123,9 +123,15 @@
 
 
 
-.slideBox > button{
+.slideBox > .btnAdd{
   position: absolute;
   bottom:15px;
+}
+
+.slideBox > .btnModal{
+  position: absolute;
+  bottom:15px;
+  right:30px;
 }
 
 .slideBox .slide{

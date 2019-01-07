@@ -131,7 +131,206 @@ class Example {
             ),
         ) );
 
+				register_rest_route( $namespace, '/myslider/', array(
+            array(
+                'methods'               => \WP_REST_Server::DELETABLE,
+                'callback'              => array( $this, 'del_slider_box' ),
+                'permission_callback'   => array( $this, 'example_permissions_check' ),
+                'args'                  => array(),
+            ),
+        ) );
+
+				register_rest_route( $namespace, '/myslider/', array(
+            array(
+                'methods'               => \WP_REST_Server::EDITABLE,
+                'callback'              => array( $this, 'edit_slider_box_name' ),
+                'permission_callback'   => array( $this, 'example_permissions_check' ),
+                'args'                  => array(),
+            ),
+        ) );
+
+
+
+
+				/*  Slide CRUD  */
+				register_rest_route( $namespace, '/myslide/', array(
+            array(
+                'methods'               => \WP_REST_Server::CREATABLE,
+                'callback'              => array( $this, 'add_slide' ),
+                'permission_callback'   => array( $this, 'example_permissions_check' ),
+                'args'                  => array(),
+            ),
+        ) );
+
+				register_rest_route( $namespace, '/myslide/', array(
+            array(
+                'methods'               => \WP_REST_Server::DELETABLE,
+                'callback'              => array( $this, 'del_slide' ),
+                'permission_callback'   => array( $this, 'example_permissions_check' ),
+                'args'                  => array(),
+            ),
+        ) );
+
+				register_rest_route( $namespace, '/myslide/', array(
+						array(
+								'methods'               => \WP_REST_Server::EDITABLE,
+								'callback'              => array( $this, 'edit_slide' ),
+								'permission_callback'   => array( $this, 'example_permissions_check' ),
+								'args'                  => array(),
+						),
+				) );
     }
+
+
+		public function edit_slide($req){
+
+			global $wpdb;
+			$my_table = $wpdb->prefix."SliderTool_slide";
+
+			$slide = $req->get_param('slider');
+
+			$result = $wpdb->update(
+				$my_table,
+				array(
+					'title' => $slide['title'],
+					'url' => $slide['url'],
+					'descx' => $slide['descx'],	// string
+				),
+				array( 'id' => 	$slide['id'] )
+			);
+
+			return new \WP_REST_Response( array(
+					'success' => $result,
+					'value' =>  $slide
+			), 200 );
+		}
+
+
+		public function del_slide($req){
+			global $wpdb;
+			$my_table = $wpdb->prefix."SliderTool_slide";
+
+			$wpdb->delete( $my_table, array( 'id' => $req->get_param('slide') ));
+			$my_table = $wpdb->prefix."SliderTool";
+			$sql = "SELECT * FROM ".$my_table." order by id";
+			$results = $wpdb->get_results($sql);
+
+
+			foreach($results as $item){
+					$my_table = $wpdb->prefix."SliderTool_slide";
+					$sql = "SELECT * FROM ".$my_table." WHERE  slider=".$item->id;
+					$results_slide = $wpdb->get_results($sql);
+					$item->xslide = $results_slide;
+			}
+
+
+			return new \WP_REST_Response( array(
+					'success' => true,
+					'value' =>  $results
+			), 200 );
+		}
+
+
+
+
+
+		public function edit_slider_box_name($req){
+			global $wpdb;
+			$my_table = $wpdb->prefix."SliderTool";
+
+			$wpdb->update(
+				$my_table,
+				array(
+					'name' => $req->get_param('name'),	// string
+				),
+				array( 'id' => $req->get_param('sboxid') )
+			);
+
+
+			$my_table = $wpdb->prefix."SliderTool";
+			$sql = "SELECT * FROM ".$my_table." order by id";
+			$results = $wpdb->get_results($sql);
+
+
+			foreach($results as $item){
+					$my_table = $wpdb->prefix."SliderTool_slide";
+					$sql = "SELECT * FROM ".$my_table." WHERE  slider=".$item->id;
+					$results_slide = $wpdb->get_results($sql);
+					$item->xslide = $results_slide;
+			}
+
+
+
+			return new \WP_REST_Response( array(
+					'success' => true,
+					'value' =>  $results
+			), 200 );
+		}
+
+
+
+		public function add_slide($req){
+			global $wpdb;
+			$my_table = $wpdb->prefix."SliderTool_slide";
+
+			$data = array(
+				'title' => 'Please Edit Slide',
+				'slider'=> $req->get_param('slider')
+			);
+			$format = array('%s');
+			$wpdb->insert($my_table,$data,$format);
+
+
+			$my_table = $wpdb->prefix."SliderTool";
+			$sql = "SELECT * FROM ".$my_table." order by id";
+			$results = $wpdb->get_results($sql);
+
+
+			foreach($results as $item){
+					$my_table = $wpdb->prefix."SliderTool_slide";
+					$sql = "SELECT * FROM ".$my_table." WHERE  slider=".$item->id;
+					$results_slide = $wpdb->get_results($sql);
+					$item->xslide = $results_slide;
+			}
+
+
+			return new \WP_REST_Response( array(
+					'success' => true,
+					'value' =>  $results
+			), 200 );
+		}
+
+
+
+		public function del_slider_box($req){
+
+			global $wpdb;
+			$my_table = $wpdb->prefix."SliderTool";
+			$wpdb->delete( $my_table, array( 'id' => $req->get_param('datakey') ));
+
+			$slide_table = $wpdb->prefix."SliderTool_slide";
+			$sql = "DELETE FROM ".$slide_table." WHERE slider=".$req->get_param('datakey');
+			$wpdb->get_results( $sql );
+
+
+
+			$sql = "SELECT * FROM ".$my_table." order by id";
+			$results = $wpdb->get_results($sql);
+
+			foreach($results as $item){
+					$my_table = $wpdb->prefix."SliderTool_slide";
+					$sql = "SELECT * FROM ".$my_table." WHERE  slider=".$item->id;
+					$results_slide = $wpdb->get_results($sql);
+
+					$item->xslide = $results_slide;
+			}
+
+			return new \WP_REST_Response( array(
+					'success' => true,
+					'value' =>  $results
+			), 200 );
+		}
+
 
 
 

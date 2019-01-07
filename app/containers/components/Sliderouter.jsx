@@ -18,6 +18,8 @@ const customStyles = {
 };
 
 
+ // Modal.setAppElement(document.getElementById('#wp-reactivate-admin'));
+
 
 export default class Slideouter extends Component {
   constructor(props){
@@ -25,7 +27,10 @@ export default class Slideouter extends Component {
 
       this.state = {
         modalIsOpen: false,
-        slider:[]
+        slider:[],
+        modalTitle:'',
+        modalDesc:'',
+        modalUrl:''
       }
 
       this.fetchWP = new fetchWP({
@@ -33,77 +38,74 @@ export default class Slideouter extends Component {
         restNonce: this.props.wpObject.api_nonce,
       });
 
+
+
+
+
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
 
-
-
-
-  openModal() {
-    this.setState({modalIsOpen: true});
-  }
-
-  afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    this.subtitle.style.color = '#f00';
-  }
-
-  closeModal() {
-    this.setState({modalIsOpen: false});
-  }
-
-
-
-
-/*
-
-getSetting = () => {
-    this.fetchWP.get( 'example' )
-    .then(
-      (json) => this.setState({
-        exampleSetting: json.value,
-        savedExampleSetting: json.value
-      }),
-      (err) => console.log( 'error', err )
-    );
-  };
-
-  updateSetting = () => {
-    this.fetchWP.post( 'example', { exampleSetting: this.state.exampleSetting } )
-    .then(
-      (json) => this.processOkResponse(json, 'saved'),
-      (err) => console.log('error', err)
-    );
-  }
-
-  deleteSetting = () => {
-    this.fetchWP.delete( 'example' )
-    .then(
-      (json) => this.processOkResponse(json, 'deleted'),
-      (err) => console.log('error', err)
-    );
-  }
-
-  processOkResponse = (json, action) => {
-    if (json.success) {
-      this.setState({
-        exampleSetting: json.value,
-        savedExampleSetting: json.value,
-      });
-    } else {
-      console.log(`Setting was not ${action}.`, json);
-    }
-  }
-
-*/
-
-
   componentDidMount(){
     /*  get all slider data */
     this.getAllSlider();
   }
+
+
+
+
+
+
+
+  openModal(slide_id,slideBoxId) {
+    /*
+    let curid = this.state.modalCurSliderId;
+    let curSlide = [...this.state.slider];
+    console.log(curid);
+    console.log(curSlide);
+    */
+
+    console.log('slide_id=>'+slide_id);
+    console.log('slideBoxId=>'+slideBoxId);
+
+    let curState = {... this.state};
+    let curSlideBox = curState.slider.filter((e) => e.id === slideBoxId);
+    let curSlide = curSlideBox[0].xslide.filter((e) => e.id === slide_id);
+
+    console.log(curSlide[0]);
+    curState.modalUrl = curSlide[0].url;
+    curState.modalTitle = curSlide[0].title;
+    curState.modalDesc = curSlide[0].descx;
+    curState.modalIsOpen = true;
+    curState.modalCurSliderId = slide_id;
+    curState.modalCurSliderBoxId = slideBoxId;
+
+    this.setState(curState);
+
+  }
+
+  afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    // this.subtitle.style.color = '#f00';
+  }
+
+  closeModal() {
+    this.setState({
+      modalCurSliderId:0,
+      modalCurSliderBoxId:0,
+      modalIsOpen: false
+    });
+  }
+
+
+
+
+
+
+
+
+
 
 
   getAllSlider = () => {
@@ -134,10 +136,28 @@ getSetting = () => {
   }
 
 
-  deleteBox = (e) => {
-    console.log(e);
-    console.log("DEL");
+  deleteBox = (dataKey) => {
+
+    this.fetchWP.delete( 'myslider',{
+      'datakey':dataKey
+    })
+    .then(
+      (json) => this.processOkResponse(json, 'saved'),
+      (err) => console.log('error', err)
+    );
   }
+
+
+  submitBoxNameHandler = (sboxid,Newname) =>{
+    console.log("XX");
+    this.fetchWP.put( 'myslider',
+    { sboxid:sboxid, name: Newname } )
+    .then(
+      (json) => this.processOkResponse(json, 'saved'),
+      (err) => console.log('error', err)
+    );
+  }
+
 
 
   processOkResponse = (json, action) => {
@@ -160,10 +180,102 @@ getSetting = () => {
 
 
 
+  /* ============= slide =================  */
+
+  addSlideHandler = (slider) =>{
+
+    this.fetchWP.post( 'myslide', {
+      slider: slider })
+    .then(
+      (json) => this.processOkResponse(json, 'saved'),
+      (err) => console.log('error', err)
+    );
+  }
+
+  delSlideHandler = (slide) =>{
+    this.fetchWP.delete( 'myslide',{
+      'slide':slide
+    })
+    .then(
+      (json) => this.processOkResponse(json, 'saved'),
+      (err) => console.log('error', err)
+    );
+  }
+
+  editSlideHandler = () =>{
+  }
+
+
+  /* =============  Modal Form  ============= */
+  formTitlehandle = (event) =>{
+
+    let title = event.target.value;
+    this.setState((prevState,props) =>({
+      modalTitle : title
+    }));
+    console.log(this.state);
+  }
+
+
+  formDescehandle = (event) =>{
+    let desc = event.target.value;
+    this.setState((prevState,props) =>({
+      modalDesc : desc
+    }));
+    console.log(this.state);
+  }
+
+
+
+  formUrlhandle = (event) =>{
+    let url= event.target.value;
+    this.setState((prevState,props) =>({
+      modalUrl : url
+    }));
+    console.log(this.state);
+  }
+
+
+
+  formSubmit  = (e) =>{
+    e.preventDefault();
+    //console.log("sx");
+
+
+    let slide_id = this.state.modalCurSliderId;
+    let slideBoxId = this.state.modalCurSliderBoxId;
+
+    let curState = [...this.state.slider];
+    let curSlideBox = curState.filter((e) => e.id === slideBoxId);
+    let curSlide = curSlideBox[0].xslide.filter((e) => e.id === slide_id)[0];
+    let modal_form = this.state;
+
+    curSlide.id=curSlide.id;
+    curSlide.title=modal_form.modalTitle;
+    curSlide.url=modal_form.modalUrl;
+    curSlide.descx=modal_form.modalDesc;
+
+    this.fetchWP.put( 'myslide', {slider: curSlide })
+    .then((json) => {
+        console.log(json);
+        /*
+        this.setState((prevState,props) =>({
+          slider :curState
+        }));
+        */
+      },
+      (err) => console.log('error', err));
+
+
+
+  }
+
+
+
   render(){
       return (
         <div>
-        <div  className="app-header">
+        <div   className="app-header">
           <div><img src={"/wp-content/plugins/WP-plugin-ReactJS/assets/"+panel} /></div>
           <div><h3> Slider Setting</h3></div>
         </div>
@@ -177,12 +289,16 @@ getSetting = () => {
                       kid={sl.id.toString()}
                       slideData={sl.xslide}
                       deleteBox={ this.deleteBox }
+                      addSlide={this.addSlideHandler}
+                      delSlide={this.delSlideHandler}
+                      submitBoxNamed={this.submitBoxNameHandler}
+                      openModaled={this.openModal}
                       />
                 </li>
               )
             }
           </div>
-          <button className="button" onClick={this.addSliderBox}>Add Slider</button>
+          <button className="button btnAdd" onClick={this.addSliderBox}>Add Slider</button>
               <Modal
                     isOpen={this.state.modalIsOpen}
                     onAfterOpen={this.afterOpenModal}
@@ -191,13 +307,24 @@ getSetting = () => {
                     contentLabel="Example Modal"
                   >
 
-                    <h2 ref={subtitle => this.subtitle = subtitle}>Hello</h2>
                     <button onClick={this.closeModal}>close</button>
-                    <div>I am a modal</div>
-                    <form>
-                      <button>the modal</button>
+                    <form onSubmit={this.formSubmit}>
+                      <div className="slider_image"></div>
+                      <div className="input-form">
+                          <input type="text"  name="url" onChange={this.formUrlhandle}  value={this.state.modalUrl}   />
+                      </div>
+                      <div className="input-form">
+                        <input type="text" onChange={this.formTitlehandle} value={this.state.modalTitle}   />
+                      </div>
+                      <div className="input-form">
+                        <textarea  onChange={this.formDescehandle} value={this.state.modalDesc}  />
+                      </div>
+                      <div className="input-form">
+                        <input type="submit" className="button"  value="Submit" />
+                      </div>
                     </form>
                   </Modal>
+
 
         </div>
       </div>

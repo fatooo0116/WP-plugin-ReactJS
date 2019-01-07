@@ -26,7 +26,7 @@ export default class Admin extends Component {
 
   render() {
     return (
-      <div className="wrap">
+      <div id="sliderDom" className="wrap">
 
         <SliderOuter wpObject={window.wpr_object}  />
 
