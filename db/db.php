@@ -20,6 +20,7 @@ function slider_tool_db() {
     url varchar(200) NOT NULL,
     descx varchar(250) NOT NULL,
     slider int(15) NOT NULL,
+    oid int(15) NOT NULL,
     UNIQUE KEY id (id)
   ) $charset_collate;";
   dbDelta( $sql );

@@ -30,7 +30,9 @@ export default class Slideouter extends Component {
         slider:[],
         modalTitle:'',
         modalDesc:'',
-        modalUrl:''
+        modalUrl:'',
+        uploadFinish:true,
+        mediaTarget:''
       }
 
       this.fetchWP = new fetchWP({
@@ -45,6 +47,13 @@ export default class Slideouter extends Component {
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+
+    let me = this;
+    wp.media.editor.send.attachment = function(props, attachment){
+      me.setState({
+        modalUrl:attachment.url
+      });
+    }
   }
 
   componentDidMount(){
@@ -136,10 +145,10 @@ export default class Slideouter extends Component {
   }
 
 
-  deleteBox = (dataKey) => {
+  deleteBox = ( dataKey) => {
 
     this.fetchWP.delete( 'myslider',{
-      'datakey':dataKey
+      'datakey' : dataKey,
     })
     .then(
       (json) => this.processOkResponse(json, 'saved'),
@@ -192,9 +201,10 @@ export default class Slideouter extends Component {
     );
   }
 
-  delSlideHandler = (slide) =>{
+  delSlideHandler = (slide,sliderBox) =>{
     this.fetchWP.delete( 'myslide',{
-      'slide':slide
+      'slide':slide,
+      'slider':sliderBox
     })
     .then(
       (json) => this.processOkResponse(json, 'saved'),
@@ -258,6 +268,8 @@ export default class Slideouter extends Component {
     this.fetchWP.put( 'myslide', {slider: curSlide })
     .then((json) => {
         console.log(json);
+
+        this.closeModal();
         /*
         this.setState((prevState,props) =>({
           slider :curState
@@ -265,10 +277,64 @@ export default class Slideouter extends Component {
         */
       },
       (err) => console.log('error', err));
-
-
-
   }
+
+
+
+  /*  Slide Change oid  */
+
+  changeOidHandler = (e) =>{
+    let id = e.target.getAttribute('data-key');
+    let dx = e.target.getAttribute('dx');
+
+    let me = this;
+
+    this.fetchWP.put( 'myslide_oid',
+      {
+        id:id,
+        dx:dx
+      }
+    ).then((json) => {
+        console.log(json);
+        if(json.success){
+
+          let newState =  [...me.state.slider];
+          let curSliderBox = newState.filter((e) => e.id === json.value.sbox);
+
+          let cur_oid = curSliderBox[0].xslide.filter((e) => e.oid === json.value.curid);
+          let next_oid = curSliderBox[0].xslide.filter((e) => e.oid === json.value.nextid);
+
+          cur_oid[0].oid = json.value.nextid;
+          next_oid[0].oid = json.value.curid;
+
+
+          me.setState({
+            slider :newState
+          });
+        }
+
+
+
+        /*
+        this.setState((prevState,props) =>({
+          slider :curState
+        }));
+        */
+      },
+      (err) => console.log('error', err));
+  }
+
+
+  medaiUpload = () =>{
+    console.log("media");
+    console.log(window.wp.media);
+
+
+
+    window.wp.media.editor.open();
+    // wp.media.editor.send.attachment;
+  }
+
 
 
 
@@ -293,6 +359,7 @@ export default class Slideouter extends Component {
                       delSlide={this.delSlideHandler}
                       submitBoxNamed={this.submitBoxNameHandler}
                       openModaled={this.openModal}
+                      changeOided={this.changeOidHandler}
                       />
                 </li>
               )
@@ -312,6 +379,7 @@ export default class Slideouter extends Component {
                       <div className="slider_image"></div>
                       <div className="input-form">
                           <input type="text"  name="url" onChange={this.formUrlhandle}  value={this.state.modalUrl}   />
+                          <button  type="button" className="button" onClick={this.medaiUpload}>upload</button>
                       </div>
                       <div className="input-form">
                         <input type="text" onChange={this.formTitlehandle} value={this.state.modalTitle}   />

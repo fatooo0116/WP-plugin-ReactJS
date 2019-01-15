@@ -87,6 +87,9 @@ class Admin {
 	 */
 	private function do_hooks() {
 		// Load admin style sheet and JavaScript.
+
+
+
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
 
@@ -163,6 +166,11 @@ class Admin {
 	 * @since    1.0.0
 	 */
 	public function display_plugin_admin_page() {
+		wp_enqueue_script('thickbox');
+		//   wp_register_script('my-upload', WP_PLUGIN_URL.'/my-script.js', array('jquery','media-upload','thickbox'));
+		wp_enqueue_media();
+		wp_enqueue_script('media-upload');
+
 		?><div id="wp-reactivate-admin"></div><?php
 	}
 

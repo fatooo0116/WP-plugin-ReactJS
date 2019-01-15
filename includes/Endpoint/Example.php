@@ -179,7 +179,89 @@ class Example {
 								'args'                  => array(),
 						),
 				) );
+
+				register_rest_route( $namespace, '/myslide_oid/', array(
+						array(
+								'methods'               => \WP_REST_Server::EDITABLE,
+								'callback'              => array( $this, 'edit_slide_oid' ),
+								'permission_callback'   => array( $this, 'example_permissions_check' ),
+								'args'                  => array(),
+						),
+				) );
     }
+
+
+		public function edit_slide_oid($req){
+			global $wpdb;
+			$my_table = $wpdb->prefix."SliderTool_slide";
+
+
+			$id = $req->get_param('id');
+			$dx = $req->get_param('dx');
+
+			$sql = "SELECT * FROM ".$my_table." Where id=".$id;
+			$results = $wpdb->get_results($sql);
+
+			$oid = $results[0]->oid;
+			$sql = "SELECT count(*) FROM ".$my_table." Where slider=".$results[0]->slider;
+			$sliderCount = $wpdb->get_var($sql);
+
+
+			$next_oid=-1;
+
+			if($dx=='up'){  /* Up */
+				if($oid!=1){
+					$next_oid = (int)$oid -1;
+				}
+			}else{  /* Down */
+				if($oid!=$sliderCount){
+					$next_oid = (int)$oid + 1;
+				}
+			}
+
+			if($next_oid>0){
+				/* update next oid */
+				$wpdb->update(
+					$my_table,
+					array(
+						'oid' => 	$oid,
+					),
+					array(
+						'oid' => 	$next_oid,
+						'slider' => $results[0]->slider
+					)
+				);
+
+				/* update current oid */
+				$wpdb->update(
+					$my_table,
+					array(
+						'oid' => $next_oid,
+					),
+					array(
+						'id' => 	$id,
+					)
+				);
+			}
+
+
+			$returnObj = array(
+				sbox => $results[0]->slider,
+				curid => (string)$oid,
+				nextid => (string)$next_oid
+			);
+
+
+
+
+
+			return new \WP_REST_Response( array(
+					'success' => true,
+					'value' =>  $returnObj
+			), 200 );
+		}
+
+
 
 
 		public function edit_slide($req){
@@ -207,14 +289,30 @@ class Example {
 
 
 		public function del_slide($req){
+
 			global $wpdb;
 			$my_table = $wpdb->prefix."SliderTool_slide";
-
 			$wpdb->delete( $my_table, array( 'id' => $req->get_param('slide') ));
+
+
+
+			$my_table2 = $wpdb->prefix."SliderTool_slide";
+			$sql2 = "SELECT * FROM ".$my_table2." WHERE  slider=".$req->get_param('slider');
+			$results2 = $wpdb->get_results($sql2);
+			$i=1;
+			foreach($results2 as $item){
+				$wpdb->update(
+					$my_table,
+					array('oid' => $i),
+				  array('id' => $item->id)
+				);
+				$i = $i+1;
+			}
+
+
 			$my_table = $wpdb->prefix."SliderTool";
 			$sql = "SELECT * FROM ".$my_table." order by id";
 			$results = $wpdb->get_results($sql);
-
 
 			foreach($results as $item){
 					$my_table = $wpdb->prefix."SliderTool_slide";
@@ -279,6 +377,22 @@ class Example {
 			);
 			$format = array('%s');
 			$wpdb->insert($my_table,$data,$format);
+
+
+
+			$my_table2 = $wpdb->prefix."SliderTool_slide";
+			$sql2 = "SELECT * FROM ".$my_table2." WHERE  slider=".$req->get_param('slider');
+			$results2 = $wpdb->get_results($sql2);
+			$i=1;
+			foreach($results2 as $item){
+				$wpdb->update(
+					$my_table,
+					array('oid' => $i),
+				  array('id' => $item->id)
+				);
+				$i = $i+1;
+			}
+
 
 
 			$my_table = $wpdb->prefix."SliderTool";

@@ -53,9 +53,10 @@
   align-items: center;
   width: 70px;
   margin-right: 30px;
-
+  height: 36px;
+  overflow-x: hidden;
 }
-
+.main  .image a{}
 .main  .image img{
   display: block;
       margin: auto;
@@ -83,12 +84,11 @@
 
 
 .slideBox  .slide-inner-box{
+  background-image:url('../img/slideshow-table-heading.png');
   margin-bottom: 10px;
   padding:10px;
-
-
   position: relative;
-  background: #fff;
+
   -webkit-box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
   box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
   margin: 1rem 0;
@@ -136,12 +136,11 @@
 
 .slideBox .slide{
 
+  background: #fff;
   margin-bottom: 10px;
   padding:10px;
-
-
   position: relative;
-  background: #fff;
+
   -webkit-box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
   box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
   margin: 1rem 0;
@@ -149,6 +148,83 @@
   border-radius: .28571429rem;
   border: 1px solid rgba(34,36,38,.15);
 }
+
+
+  .REST_Controller button.edit{
+    background-image:url('../img/edit-3.svg');
+    background-size: auto 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    text-indent: -9999px;
+    width: 30px;
+  }
+  .REST_Controller button.edit:hover,
+  .REST_Controller button.edit:active,
+  .REST_Controller button.edit:focus{
+    background-image:url('../img/edit-3.svg');
+    background-size: auto 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    text-indent: -9999px;
+  }
+
+  .REST_Controller button.del,
+  .REST_Controller button.del:hover,
+  .REST_Controller button.del:active,
+  .REST_Controller button.del:focus{
+    background-image:url('../img/trash-2.svg');
+    background-size: auto 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    text-indent: -9999px;
+    width: 30px;
+  }
+
+  .REST_Controller button.up,
+  .REST_Controller button.up:hover,
+  .REST_Controller button.up:active,
+  .REST_Controller button.up:focus{
+    background-image:url('../img/chevron-up.svg');
+    background-size: auto 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    text-indent: -9999px;
+    width: 30px;
+  }
+
+  .REST_Controller button.down,
+  .REST_Controller button.down:hover,
+  .REST_Controller button.down:active,
+  .REST_Controller button.down:focus{
+    background-image:url('../img/chevron-down.svg');
+    background-size: auto 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    text-indent: -9999px;
+    width: 30px;
+  }
+  .slideBox .slide .image a{ display: block; height:100%; }
+  .slideBox .slide .image a img{
+    height:100%;
+  }
+ .slideBox .slide button{
+   margin-left:3px;
+ }
+ .slideBox .slide button.hideMe{
+   visibility: hidden;
+ }
+
+ .slideBox .slide button.edit{
+   padding:2px 5px 2px;
+ }
+
+.slideBox .slide button.del{
+  padding:1px 3px 3px;
+}
+.slideBox .slide button.up,
+.slideBox .slide button.down{
+     padding: 0 3px;
+   }
 
 .slideBox li {
   list-style-type: none;

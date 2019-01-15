@@ -49,7 +49,9 @@ export default class Slidebox extends Component {
 
   deleteSliderBox = (e) => {
     let datakey = e.target.getAttribute('data-key');
-    this.props.deleteBox(datakey);
+
+
+    this.props.deleteBox( datakey);
   }
 
 
@@ -58,7 +60,9 @@ export default class Slidebox extends Component {
   }
   delSlide = (e) =>{
     // console.log(e.target.getAttribute('slide-key'));
-    this.props.delSlide(e.target.getAttribute('slide-key'));
+    let slideboxkey = e.target.getAttribute('slidebox-key');
+    let slidekey = e.target.getAttribute('slide-key')
+    this.props.delSlide(slidekey,slideboxkey);
   }
 
 
@@ -69,7 +73,17 @@ export default class Slidebox extends Component {
 
 
 
+
+
+
+
   render(){
+
+    const slideData =   this.props.slideData;
+    slideData.sort(function(a, b) {
+      return a.oid - b.oid;
+    });
+
 
       let SliderName = this.state.isEdit ? <label><input type="text" onChange={this.updateSliderBoxName}  defaultValue={this.state.name} /><button  className="button" onClick={this.submitBoxName} >Save</button></label> : <label  onClick={this.toggleEditName}>{this.state.name}</label>;
 
@@ -84,16 +98,19 @@ export default class Slidebox extends Component {
           <div  className="content">
             <ul>
                 {
-                  this.props.slideData.map((sl) =>
+                  slideData.map((sl) =>
                     <li key={sl.id} >
                       <Slide
                         slideBox={this.props.kid}
                         datakey={sl.id}
                         title={sl.title}
                         desc={sl.descx}
+                        slideNum={this.props.slideData.length}
                         url={sl.url}
                         delSlided={this.delSlide}
                         modalopend={this.modalOpen}
+                        changeOided={this.props.changeOided}
+                        oid={sl.oid}
                         />
                     </li>
                   )
